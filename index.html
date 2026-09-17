@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>etiquetador</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#0a7462" />
+    <link rel="icon" href="octo.ico" />
+</head>
+
+<body>
+    <header>
+        <h1>Etiquetador</h1>
+
+        <!-- más adelante acá puede ir también el botón "Imprimir" -->
+        <img src="images/pulpo.jpg" alt="My test image" width="300" height="150" />
+        <p>aplicacion hecha por FlammableOolongTea </p>
+    <main>
+        <section>
+            <h2>Nuevo producto</h2>
+            <form>
+                <p>
+                    <label for="inSKu">Aca van los SKU</label>
+                    <input id="inSKu" type="text" name="SKU" />
+                </p>
+                <p>
+                    <label for="inEAN">Aca van los EAN</label>
+                    <input id="inEAN" type="text" name="EAN" />
+                </p>
+                <p>
+                    <label for="inName">Aca van los nombres</label>
+                    <input id="inName" type="text" name="name" />
+                </p>
+                <p>
+                    <label for="inCant">Aca van la cantidad</label>
+                    <input id="inCant" type="number" min="1" value="1" />
+                </p>
+                <p>
+                    <button type="submit">Agregar a la plancha</button>
+                </p>
+                <p>
+                    <button id="btnPrint" type="button">Imprimir</button>
+               </p>
+               <p>
+               <textarea id="inBulk" rows="6" placeholder="Pegá acá las columnas SKU, EAN, Nombre desde Excel"></textarea>
+                <button id="btnImport" type="button">Importar</button>
+               </p>
+                <p>
+                <button id="btnVaciar" type="button">Vaciar todo</button>
+               </p>
+    </header>
+            </form>
+        </section>
+        <section>
+            <h2>Productos a imprimir</h2>
+            <ul id="lista">
+
+            </ul>
+        </section>
+        <section>
+            <h2>Vista previa</h2>
+            <div id="hojas">
+                <div class="etiqueta">
+                    <div class="et__sku">SKU: 195</div>
+                    <div class="et__ean">EAN: 7790520032010</div>
+                    <div class="et__nombre">Nombre: GLADE LAUNDRY FRESH FLOWERS 400ML/12</div>
+                    <div class="et__barcode" id ="barcodetest"></div>
+                    <div class="et__big">195</div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+    <script src="JSBarcode.min.js"></script>
+    <script src="app.js">
+
+    </script>
+    
+</body>
+
+</html>

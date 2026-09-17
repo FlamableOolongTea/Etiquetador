@@ -1,0 +1,12 @@
+{
+  "name": "Etiquetador Mendi",
+  "short_name": "Etiquetas",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0a7462",
+  "icons": [
+    { "src": "octom.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "octo.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

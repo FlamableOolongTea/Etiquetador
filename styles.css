@@ -1,0 +1,230 @@
+/* =========================================================================
+   Etiquetas — estilos (base)
+   -------------------------------------------------------------------------
+   Idea clave: las variables se DECLARAN una vez en :root y se USAN muchas
+   veces con var(...). Cambiás el valor arriba y se actualiza en todos lados
+   donde lo pediste. Los comentarios de abajo marcan dónde pasa cada cosa.
+   ========================================================================= */
+
+
+/* =========================================================================
+   1) VARIABLES  (custom properties)  —  acá se DECLARAN
+   -------------------------------------------------------------------------
+   Cada línea es nombre --> valor. Todavía no pintan nada: son el "papelito"
+   con los colores de la empresa. Al vivir en :root (la raíz = el <html>),
+   quedan disponibles para CUALQUIER elemento de la página, por más adentro
+   que esté, porque se heredan hacia abajo.
+   ========================================================================= */
+:root {
+  --primary:     #0a7462;              /* verde de la marca (el que más vas a usar) */
+  --primary-dim: rgba(10,116,98,0.12); /* el mismo verde bien transparente, para fondos suaves */
+  --bg:          #FAFAFA;              /* fondo general de la página */
+  --surface:     #F2F2F0;              /* fondo de tarjetas / paneles */
+  --text-dark:   #1a1a1a;              /* texto principal */
+  --text-mid:    #4d4d4d;              /* texto secundario */
+  --text-light:  #A1A1A1;              /* texto tenue / apagado */
+  --footer-bg:   #06160f;              /* (por ahora sin uso; lo dejo por si acaso) */
+  --border:      rgba(0,0,0,0.08);     /* color de bordes suaves */
+}
+
+
+/* =========================================================================
+   2) RESET  (base pareja para todos los elementos)
+   ========================================================================= */
+/* box-sizing: border-box hace que el padding y el borde NO agranden la caja.
+   Es el "modelo de caja" que menciona la guía en la Fase 2. Va en todo proyecto. */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Saqué "cursor: none" que venía del CSS de la empresa: eso escondía el
+   puntero del mouse (era la trampa que te había marcado). Dejo solo el
+   ajuste de tamaño de texto, que sí es inofensivo. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  /* USO de variables: pido los valores por nombre con var(...) */
+  background: var(--bg);
+  color: var(--text-dark);
+
+  /* 'clother' es la fuente de Mendi. OJO: solo aparece si copiás los
+     archivos .woff2 a tu carpeta y agregás su @font-face. Si no están,
+     el navegador usa 'sans-serif' (el respaldo) sin tirar ningún error. */
+  font-family: 'clother', sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+/* Acá también saqué "cursor: none", por lo mismo de arriba. */
+a, button { color: inherit; text-decoration: none; }
+
+
+/* =========================================================================
+   3) DETALLES GLOBALES  (cosmético, opcional pero inofensivo)
+   ========================================================================= */
+/* Color al seleccionar texto con el mouse */
+::selection { background: var(--primary); color: var(--bg); }
+
+/* Barra de scroll finita y verde (solo navegadores tipo Chrome/Edge) */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+
+/* Contorno visible cuando navegás con el teclado (tecla Tab). Buena accesibilidad. */
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; border-radius: 2px; }
+
+
+/* =========================================================================
+   4) SKIP LINK  (accesibilidad — opcional)
+   -------------------------------------------------------------------------
+   Solo hace algo si en tu HTML agregás <a class="skip-link" href="#main">.
+   Sirve para saltar directo al contenido usando el teclado. Podés dejarlo
+   para más adelante o borrarlo; por ahora no molesta.
+   ========================================================================= */
+.skip-link {
+  position: fixed; top: -100%; left: 50%; transform: translateX(-50%);
+  background: var(--primary); color: #fff; padding: 0.75rem 1.5rem;
+  border-radius: 0 0 8px 8px; font-size: 0.85rem; font-weight: 700;
+  z-index: 99999;
+
+  /* Antes acá decía var(--ease-out), pero esa variable NO la copiaste al
+     :root, así que quedaba "colgada". Es EXACTAMENTE lo que te expliqué:
+     un var(...) que apunta a algo que no existe se ignora en silencio.
+     Lo cambié por un valor real ('ease') para que la transición funcione. */
+  transition: top 0.3s ease;
+}
+.skip-link:focus { top: 0; }
+
+/* =========================================================================
+   5) FORMULARIO
+   ========================================================================= */
+button {
+   background: var(--primary);
+   /* USO tu verde de marca */
+   color: var(--bg);
+   /* texto claro encima */
+   border: none;
+   border-radius: 8px;
+   padding: 10px 16px;
+   font-weight: 700;
+   cursor: pointer;
+   width: 100%
+      /* la manito al pasar por encima */
+}
+
+#btnPrint { 
+  margin-top: 10px;
+  margin-bottom: 10px;       
+  background: var(--text-mid);   
+}
+
+input {
+   font: inherit;
+   font-size: 16px;
+   padding: 9px 11px;
+   border: 1px solid var(--border);
+   border-radius: 8px;
+   background: var(--bg);
+   color: var(--text-dark);
+   width: 100%;
+}
+#btnVaciar {
+  margin-top: 10px;       
+  background: var(--text-mid);   
+}
+
+main {
+   max-width: 640px;
+   /* en pantalla ancha no pasa de esto */
+   margin: 0 auto;
+   /* lo centra */
+   padding: 16px;
+   /* aire contra los bordes, clave en el celu */
+}
+
+header img {
+  margin: 8px auto;      /* 8px arriba/abajo, "auto" a los costados = centrada */
+  border-radius: 8px;    /* esquinas redondeadas, para prolijarla un toque */
+}
+
+
+label {
+  display: block;         /* cada label ocupa su propio renglón, arriba del input */
+  margin: 8px auto;
+  margin-bottom: 4px;     /* un respiro chico entre el label y su campo */
+  font-size: .8rem;       /* un poco más chico que el texto normal */
+  color: var(--text-mid); /* USO tu gris secundario, para que no compita con el input */
+  text-align:center;
+}
+header p {
+  text-align: center;
+}
+
+/* =========================================================================
+   6) ETIQUETA — el formato que va a papel
+   ========================================================================= */
+.etiqueta {
+  width: 160mm;                            /* 16 cm */
+  height: 35mm;                            /* 3,5 cm */
+  border: 1px solid #000;
+  display: grid;                           /* activa el modo grilla */
+  grid-template-columns: 30mm 80mm 50mm;   /* las 3 columnas, en orden */
+  grid-template-rows: 5mm 30mm;            /* las 2 filas */
+}
+
+.et__sku    { grid-column: 1;     grid-row: 1;
+             border: 1px solid #000;
+             padding: 0%;             
+             }   /* arriba izquierda */
+.et__ean    { grid-column: 1;     grid-row: 2;
+               align-items: center;display: flex;
+               font-size: 15px;
+               }   /* abajo izquierda */
+.et__nombre { grid-column: 2 / 4; grid-row: 1; border: 1px solid #000;
+              align-items: center;display: flex;
+            }   /* arriba, ocupa col 2 y 3 */
+.et__barcode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1mm;
+  overflow: hidden;          /* recorta cualquier sobrante, por las dudas */
+}
+.et__barcode svg {
+  max-width: 100%;           /* nunca más ancho que la celda */
+  max-height: 100%;
+  height: auto;              /* mantiene la proporción */
+}
+.et__big    { grid-column: 3;     grid-row: 2;display: flex; 
+               align-items: center;
+             justify-content: center;font-size: 80px; border: 1px solid #000;
+            }   /* abajo derecha */
+
+.hoja {
+  width: 210mm;
+  min-height: 297mm;
+  background: #fff;
+  margin: 0 auto 10mm;   /* separa una hoja de la otra en pantalla */
+  break-after : page;
+}
+
+@media print {
+  /* All your print styles go here */
+  header,
+  form,
+  h1,
+  h2,
+  #lista {
+    display: none !important;
+  }
+  
+  /*#hojas {}*/
+
+}
+
+@page  print {
+   size: A4;
+   margin: 0;
+}
+
