@@ -1,4 +1,6 @@
 let products = [];
+let digitos = Number(localStorage.getItem('digitos')) || 3;
+
 
 const form = document.querySelector('form');
 
@@ -92,7 +94,9 @@ function renderHojas() {
                 div.appendChild(nombre)
                 let big = document.createElement('div')
                 big.className = 'et__big'
-                big.textContent = prod.sku.slice(-3)
+                const texto = prod.sku.slice(-digitos)
+                big.textContent = texto
+                big.style.fontSize = Math.min(80, Math.floor(280 / texto.length)) + 'px'
                 div.appendChild(big)
                 let barcode = document.createElement('div')
                 barcode.className = 'et__barcode'
@@ -156,7 +160,16 @@ form.addEventListener('submit', function (e) {
     console.log(products);
 
 });
+const inDigitos = document.querySelector('#inDigitos');
+inDigitos.value = digitos;   // muestra el valor guardado al abrir la app
 
+inDigitos.addEventListener('input', function () {
+    const n = parseInt(inDigitos.value);
+    if (!n || n < 1) return;          // vacío o 0: no hago nada
+    digitos = n;
+    localStorage.setItem('digitos', digitos);
+    renderHojas();
+});
 
 document.querySelector('#btnImport').addEventListener('click',importar_excel);
 
